@@ -1,0 +1,19 @@
+{
+	"name": "@iconify/types",
+	"description": "Types for Iconify icons",
+	"version": "0.0.1",
+	"author": "Vjacheslav Trushkin",
+	"license": "(Apache-2.0 OR GPL-2.0)",
+	"main": "types.ts",
+	"scripts": {
+		"lint": "eslint index.ts"
+	},
+	"bugs": "https://github.com/iconify/types/issues",
+	"homepage": "https://github.com/iconify/types",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/iconify/types.git"
+	},
+	"devDependencies": {},
+	"dependencies": {}
+}
