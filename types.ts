@@ -134,6 +134,9 @@ export interface IconifyInfo {
 	// Icon grid: number or array of numbers.
 	height?: number | number[];
 
+	// Display height for samples: 16 - 24
+	displayHeight?: number;
+
 	// Category on Iconify collections list.
 	category?: string;
 
