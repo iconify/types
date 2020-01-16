@@ -15,22 +15,22 @@ Each icon is represented by `IconifyIcon` type. It is a simple object with multi
 
 The only required attribute is:
 
-- `body` that contains inner HTML of icon as string, for example `<path d="..."/>`
+- `body`: string. Value contains inner HTML of an icon as a string, for example `<path d="..."/>`.
 
 Optional attributes are represented by type `IconifyOptional`. They are split into several types: dimensions (`IconifyDimenisons` type) and transformations (`IconifyTransformations` type).
 
 Dimensions attributes:
 
-- `width` viewBox width, number. If missing, value is set to 16
-- `height` viewBox height, number. If missing, value is set to 16
-- `left` viewBox left, number. If missing, value is set to 0
-- `top` viewBox top, number. If missing, value is set to 0
+- `width`: number. viewBox width, number. If missing, value is set to 16.
+- `height`: number. viewBox height, number. If missing, value is set to 16.
+- `left`: number. viewBox left, number. If missing, value is set to 0.
+- `top`: number. viewBox top, number. If missing, value is set to 0.
 
 Transformations:
 
-- `rotate` icon rotation, number. Iconify icons can be rotated in 90 degrees increments, allowing to reuse same source icon for multiple icons, such as arrow-up being copy of arrow-left rotated by 90 degrees. Values are 0 for 0 degrees, 1 for 90 degrees, 2 for 180 degrees, 3 for 270 degrees. Default value is 0.
-- `hFlip` horizontal flip, boolean. Similar to rotation, icon can be flipped. It can be used to quickly create aliases, such as arrow-left being alias of arrow-right, but with hFlip set to true. Default value is false.
-- `vFlip` vertical flip. Default value is false.
+- `rotate`: number. Icon rotation. Iconify icons can be rotated in 90 degrees increments, allowing to reuse same source icon for multiple icons, such as arrow-up being a copy of arrow-left rotated by 90 degrees. Values are 0 for 0 degrees, 1 for 90 degrees, 2 for 180 degrees, 3 for 270 degrees. The default value is 0.
+- `hFlip`: boolean. Horizontal flip. Similar to the rotation transformation, an icon can be flipped horizontally and vertically. It can be used to quickly create aliases, such as arrow-left being an alias of arrow-right, but with hFlip set to true. The default value is false.
+- `vFlip`: boolean. Vertical flip. The default value is false.
 
 Example of icon object:
 
@@ -47,14 +47,14 @@ const mdiHandIcon = {
 
 Iconify JSON format is available from multiple sources:
 
-- NPM package @iconify/json that includes all icon sets
+- NPM package `@iconify/json` that includes all icon sets
 - API responses used by SVG framework
 
 JSON format structure is available as `IconifyJSON` type. It is an object with several fields:
 
-- `prefix` icon set prefix, string
-- `icon` icons data, object where key is icon name and value is `IconifyIcon` object (see "Icon format" above)
-- `aliases` icon aliases, object (see "Aliases" section below)
+- `prefix`: string. Icon set prefix.
+- `icons`: object. Icons data. Value is an object that represents a set of icons, where the key is an icon name and value is `IconifyIcon` object (see "Icon format" above).
+- `aliases`: object. Icon aliases, similar to `icons` object (see "Aliases" section below).
 
 Example:
 
@@ -76,11 +76,11 @@ Example:
 }
 ```
 
-All icon properties except for `body` are optional and are represented by type `IconifyOptional`. Type `IconifyJSON` also extends type `IconifyOptional`, allowing all optional properties to be placed in root object.
+All icon properties except for `body` are optional and are represented by type `IconifyOptional`. Type `IconifyJSON` also extends type `IconifyOptional`, allowing all optional properties to be placed in the root object.
 
-If icon is missing a property, look in root object for default value. If root object does not have default value, use global default value for that property (see list of properties and default values in "Icon format" section above).
+If an icon is missing a property, look in the root object for the default value. If the root object does not have the default value, use Iconify default value for that property (see list of properties and default values in "Icon format" section above).
 
-This allows to reduce duplication.
+Default values in the root object make it possible to reduce duplication.
 
 Example:
 
@@ -100,7 +100,7 @@ Example:
 }
 ```
 
-In this example both icons are 24x24, so width and height have been moved to root object.
+In this example, both icons are 24x24, so width and height have been moved to the root object.
 
 Another example:
 
@@ -124,7 +124,7 @@ Another example:
 }
 ```
 
-In this example `arrow-circle-left` and `barcode` have width of 512, `arrow-left` has width of 448. All icons have height of 512.
+In this example `arrow-circle-left` and `barcode` have width of 512, `arrow-left` has width of 448. All icons have the height of 512.
 
 #### Aliases
 
@@ -132,7 +132,7 @@ In addition to `icons`, another important field in JSON object is `aliases`.
 
 Aliases object is similar to icons object, except that instead of icon body icons reference another icon.
 
-Each entry has same attributes as icon, except for `body` and has required attribute `parent` that contains name of parent icon. Parent icon must be included in JSON file as well as icon.
+Each entry has the same attributes as an icon, except for `body` and has required attribute `parent` that contains the name of parent icon. Parent icon must be included in the JSON file as well as icon.
 
 Example:
 
@@ -154,7 +154,7 @@ Example:
 }
 ```
 
-In this example "car" is alias of "automobile", allowing to use same icon by multiple names.
+In this example "car" is an alias of "automobile", allowing to use the same icon by multiple names.
 
 Another example:
 
@@ -259,13 +259,13 @@ is identical to:
 
 #### Meta data
 
-JSON files might also contain meta data. That data is used for browsing icons, searching icons, exporting icon sets as fonts.
+JSON files might also contain the metadata. That data is used for browsing icons, searching icons, exporting icon sets as fonts.
 
-Meta data is combination of several types, represented as type `IconifyMetaData`.
+Metadata is a combination of several types, represented as type `IconifyMetaData`.
 
 ##### Icon set information
 
-Icon set information is part of meta data, it includes information about author and license.
+Icon set information is part of the metadata, it includes information about an author and license.
 
 Example:
 
@@ -296,13 +296,35 @@ Example:
 }
 ```
 
+##### Info
+
+Information block is part of the metadata, it is used for browsing or searching icon sets. It also contains the license for icons in the icon set and information about the author.
+
+Info block is represented by the type `IconifyInfo`. You can see an example above in "info" property.
+
+IconifyInfo type has the following properties, most of them are optional:
+
+- `name`: string. Icon set name. This field is always set.
+- `total`: number. The total number of icons, optional.
+- `version`: string. The current version, optional.
+- `author`: object. Information about the author, always set. Author information has the following properties:
+  - `name`: string. Author name. This field is always set.
+  - `url`: string. Link to icon set, optional. Usually links to GitHub repository.
+- `license`: object. Information about the license, always set. License information has the following properties:
+  - `title`: string. License title. This field is always set.
+  - `spdx`: string. SPDX license identifier, optional.
+  - `url`: string. Link to the license, optional.
+- `samples`: string[]. Value is an array of icon names that should be used as samples when showing the icon set in an icon sets list.
+- `height`: number | number[]. Value is a number or array of numbers, values are pixel grids used in the icon set. If any icons in an icon set do not match the grid, this attribute should not be set.
+- `displayHeight`: number. The height value that should be used for displaying samples. Value is a number between 16 and 30 (inclusive).
+
 ##### Characters map
 
-Characters map is part of meta data, it is used for icon sets are are either imported from icon fonts or intended to be exported to icon font.
+Characters map is part of the metadata, it is used for icon sets that are either imported from icon fonts or intended to be exported to icon font.
 
-Characters map allows to store characters for export as well as searching icons by character used in icon font.
+Characters map allows storing characters for export as well as searching icons by character used in an icon font.
 
-It is a simple object, where key is character code in hexadecimal form, value is icon name.
+It is a simple object, where the key is character code in hexadecimal form, value is an icon name.
 
 Important: each icon can have multiple characters!
 
@@ -328,9 +350,9 @@ Example:
 
 ##### Categories
 
-Categories are part of meta data, used to allow filtering icons when showing entire icons set.
+Categories are part of the metadata, used to allow filtering icons when showing entire icons set.
 
-Categories list is simple object, where key is category name, value is list of icons.
+Categories list is a simple object, where the key is category name, value is the list of icons.
 
 Important: each icon can belong to multiple categories!
 
@@ -374,7 +396,7 @@ Important: each icon can belong to multiple categories!
 
 ##### Themes
 
-Themes are part of meta data, similar to categories, but using prefixes or suffixes to identify icons that belong to theme.
+Themes are part of the metadata, similar to categories, but using prefixes or suffixes to identify icons that belong to a theme.
 
 This is useful when icon set has variations of icons, such as "baseline-_", "outline-_".
 
@@ -411,21 +433,21 @@ Example:
 }
 ```
 
-Each theme can have one of attributes: `prefix` or `suffix`. Prefix must end with `-`, suffix must start with `-`.
+Each theme can have one of the attributes: `prefix` or `suffix`. The prefix must end with `-`, suffix must start with `-`.
 
-In example above, all icons that start with "baseline-", such as "baseline-home", are considered part of "Baseline" theme.
+In an example above, all icons that start with "baseline-", such as "baseline-home", are considered part of the "Baseline" theme.
 
 #### All attributes
 
-For example of full JSON files that include meta data, look in JSON files in `@iconify/json` package or browse it at GitHub: https://github.com/iconify/collections-json
+For an example of full JSON files that include metadata, look in JSON files in `@iconify/json` package or browse it at GitHub: https://github.com/iconify/collections-json
 
-For example of individual icons, look in JavaScript files in NPM packages such as `@iconify/icons-mdi`.
+For an example of individual icons, look in JavaScript files in NPM packages such as `@iconify/icons-mdi`.
 
 ## Usage
 
 This repository is intended to be used with any Iconify packages.
 
-At the moment of writing, there are multiple Iconify packages that are written without TypeScript. At the beginning of 2020 plan is to rewrite all of them with TypeScript to make sure data is consistent and avoid duplication, this package will be used for sharing types between Iconify packages.
+At the moment of writing, multiple Iconify packages are written without TypeScript. At the beginning of the year 2020 plan is to rewrite all of them with TypeScript to make sure data is consistent and avoid duplication, this package will be used for sharing types between Iconify packages.
 
 ## License
 
