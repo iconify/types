@@ -1,17 +1,17 @@
 # Iconify Types
 
-Type definitions for using Iconify libraries and JSON files with TypeScript.
+Type definitions for using Iconify icon sets with TypeScript.
 
 ## Files structure
 
 Iconify icon sets are available in several formats:
 
-- JSON files that combine many icons in one file
+- Big JSON files that combine many icons in one file
 - Node.js packages split into individual icons
 
 ### Icon format
 
-Each icon is represented by `IconifyIcon` type. It is a simple object with multiple string, number or boolean attributes.
+Each icon is represented by the `IconifyIcon` type. It is a simple object with multiple string, number or boolean attributes.
 
 The only required attribute is:
 
@@ -23,12 +23,12 @@ Dimensions attributes:
 
 - `width`: number. viewBox width, number. If missing, value is set to 16.
 - `height`: number. viewBox height, number. If missing, value is set to 16.
-- `left`: number. viewBox left, number. If missing, value is set to 0.
-- `top`: number. viewBox top, number. If missing, value is set to 0.
+- `left`: number. viewBox left, number. If missing, the value is set to 0.
+- `top`: number. viewBox top, number. If missing, the value is set to 0.
 
 Transformations:
 
-- `rotate`: number. Icon rotation. Iconify icons can be rotated in 90 degrees increments, allowing to reuse same source icon for multiple icons, such as arrow-up being a copy of arrow-left rotated by 90 degrees. Values are 0 for 0 degrees, 1 for 90 degrees, 2 for 180 degrees, 3 for 270 degrees. The default value is 0.
+- `rotate`: number. Icon rotation. Iconify icons can be rotated in 90 degrees increments, allowing to reuse the same source icon for multiple icons, such as arrow-up being a copy of arrow-left rotated by 90 degrees. Values are 0 for 0 degrees, 1 for 90 degrees, 2 for 180 degrees, 3 for 270 degrees. The default value is 0.
 - `hFlip`: boolean. Horizontal flip. Similar to the rotation transformation, an icon can be flipped horizontally and vertically. It can be used to quickly create aliases, such as arrow-left being an alias of arrow-right, but with hFlip set to true. The default value is false.
 - `vFlip`: boolean. Vertical flip. The default value is false.
 
@@ -43,18 +43,18 @@ const mdiHandIcon = {
 };
 ```
 
-### JSON format
+### Icon sets format
 
-Iconify JSON format is available from multiple sources:
+Iconify icon sets format is available from multiple sources:
 
 - NPM package `@iconify/json` that includes all icon sets
 - API responses used by SVG framework
 
-JSON format structure is available as `IconifyJSON` type. It is an object with several fields:
+Icon set format structure is available as the `IconifyJSON` type. It is an object with several fields:
 
 - `prefix`: string. Icon set prefix.
 - `icons`: object. Icons data. Value is an object that represents a set of icons, where the key is an icon name and value is `IconifyIcon` object (see "Icon format" above).
-- `aliases`: object. Icon aliases, similar to `icons` object (see "Aliases" section below).
+- `aliases`: object. Icon aliases, similar to the `icons` object (see "Aliases" section below).
 
 Example:
 
@@ -78,7 +78,7 @@ Example:
 
 All icon properties except for `body` are optional and are represented by type `IconifyOptional`. Type `IconifyJSON` also extends type `IconifyOptional`, allowing all optional properties to be placed in the root object.
 
-If an icon is missing a property, look in the root object for the default value. If the root object does not have the default value, use Iconify default value for that property (see list of properties and default values in "Icon format" section above).
+If an icon is missing a property, look in the root object for the default value. If the root object does not have the default value, use Iconify default value for that property (see list of properties and default values in the "Icon format" section above).
 
 Default values in the root object make it possible to reduce duplication.
 
@@ -124,15 +124,15 @@ Another example:
 }
 ```
 
-In this example `arrow-circle-left` and `barcode` have width of 512, `arrow-left` has width of 448. All icons have the height of 512.
+In this example `arrow-circle-left` and `barcode` have width of 512, `arrow-left` has width of 448. All icons have a height of 512.
 
 #### Aliases
 
-In addition to `icons`, another important field in JSON object is `aliases`.
+In addition to `icons`, another important field in icon set object is `aliases`.
 
 Aliases object is similar to icons object, except that instead of icon body icons reference another icon.
 
-Each entry has the same attributes as an icon, except for `body` and has required attribute `parent` that contains the name of parent icon. Parent icon must be included in the JSON file as well as icon.
+Each entry has the same attributes as an icon, except for `body` and has required attribute `parent` that contains the name of the parent icon. The parent icon must be present in the icon set file.
 
 Example:
 
@@ -259,7 +259,7 @@ is identical to:
 
 #### Meta data
 
-JSON files might also contain the metadata. That data is used for browsing icons, searching icons, exporting icon sets as fonts.
+Icon set files might also contain the metadata. That data is used for browsing icons, searching icons, exporting icon sets as fonts.
 
 Metadata is a combination of several types, represented as type `IconifyMetaData`.
 
@@ -350,7 +350,7 @@ Example:
 
 ##### Categories
 
-Categories are part of the metadata, used to allow filtering icons when showing entire icons set.
+Categories are part of the metadata, used to allow filtering icons when showing the entire icons set.
 
 Categories list is a simple object, where the key is category name, value is the list of icons.
 
@@ -439,7 +439,7 @@ In an example above, all icons that start with "baseline-", such as "baseline-ho
 
 #### All attributes
 
-For an example of full JSON files that include metadata, look in JSON files in `@iconify/json` package or browse it at GitHub: https://github.com/iconify/collections-json
+For an example of full icon set files that include metadata, look in icon set files in `@iconify/json` package or browse it at GitHub: [https://github.com/iconify/collections-json](https://github.com/iconify/collections-json)
 
 For an example of individual icons, look in JavaScript files in NPM packages such as `@iconify/icons-mdi`.
 
