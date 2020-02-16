@@ -154,7 +154,7 @@ Example:
 }
 ```
 
-In this example "car" is an alias of "automobile", allowing to use the same icon by multiple names.
+In this example `car` is an alias of `automobile`, allowing to use the same icon by multiple names.
 
 Another example:
 
@@ -200,7 +200,7 @@ In this example `caret-right` is alias of `caret-left`, but with additional `hFl
 
 If both icon and alias have same attribute, following rules apply:
 
-- `rotate`: attributes are combined. For example, icon has rotate = 1, alias has rotate = 1. Result will have rotate = 2. If rotate > 3, rotate = rotate - 4.
+- `rotate`: attributes are combined. For example, icon has rotate = 1, alias has rotate = 1. Result will have rotate = 2. To prevent overflow, if rotate > 3, rotate = rotate - 4.
 - `hFlip` and `vFlip`: attributes are combined. For example, icon has hFlip = true, alias also has hFlip = true (icon.hFlip !== alias.hFlip). Result is false. false + false = false, false + true = true, true + true = false.
 - other attributes are overwritten.
 
@@ -257,7 +257,7 @@ is identical to:
 }
 ```
 
-#### Meta data
+#### Metadata
 
 Icon set files might also contain the metadata. That data is used for browsing icons, searching icons, exporting icon sets as fonts.
 
