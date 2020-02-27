@@ -211,6 +211,9 @@ export interface IconifyJSON extends IconifyOptional, IconifyMetaData {
 	// Optional aliases.
 	aliases?: IconifyAliases;
 
+	// Optional list of missing icons. Returned by Iconify API when querying for icons that do not exist.
+	not_found?: string[];
+
 	// IconifyOptional properties that are used as default values for icons when icon is missing value.
 	// If property exists in both icon and root, use value from icon.
 	// This is used to reduce duplication.
